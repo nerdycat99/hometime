@@ -33,3 +33,4 @@ Metrics/BlockLength:
   Exclude:
     - spec/models/reservation_spec.rb
     - spec/models/guest_spec.rb
+    - spec/requests/api/v1/reservations_spec.rb
