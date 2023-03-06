@@ -1,0 +1,32 @@
+require:
+  - rubocop-rails
+  # - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+  SuggestExtensions: false
+
+  # exclude default rails code
+  # otherwise is a pain to patch in the rails update
+  Exclude:
+    - "db/**/*"
+    - "config/**/*"
+    - "script/**/*"
+    - "bin/{rails,rake,bundle,setup,yarn,webpack,webpack-dev-server,delayed_job}"
+    - "spec/{spec,rails}_helper.rb"
+    - "Rakefile"
+    - "config.ru"
+    - "vendor/bundle/**/*"
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 150
+  Exclude:
+
+Metrics/BlockLength:
+  Exclude:
