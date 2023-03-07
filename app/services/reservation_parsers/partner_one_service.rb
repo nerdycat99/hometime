@@ -6,6 +6,7 @@ module ReservationParsers
 
     def initialize(data)
       self.formatted_data = format(data)
+      Rails.logger.debug BaseService.formatted_phone_numbers(nil).inspect
     end
 
     # rubocop:disable Metrics/MethodLength
@@ -15,9 +16,9 @@ module ReservationParsers
           code: data['reservation_code'],
           start_date: data['start_date'],
           end_date: data['end_date'],
-          security_price: data['security_price'],
-          payout_amount: data['payout_price'],
-          total_paid: data['total_price'],
+          security_price: BaseService.formatted_price(data['security_price']),
+          payout_amount: BaseService.formatted_price(data['payout_price']),
+          total_paid: BaseService.formatted_price(data['total_price']),
           currency: data['currency']&.downcase,
           status: data['status']&.downcase,
           adults: data['adults'],
@@ -29,7 +30,7 @@ module ReservationParsers
           first_name: data.dig('guest', 'first_name'),
           last_name: data.dig('guest', 'last_name'),
           email: data.dig('guest', 'email'),
-          phone: data.dig('guest', 'phone')
+          phone: BaseService.formatted_phone_numbers(data.dig('guest', 'phone'))
         } }
     end
     # rubocop:enable Metrics/MethodLength

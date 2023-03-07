@@ -14,4 +14,10 @@ class Reservation < ApplicationRecord
   validates :security_price, :payout_amount, :total_paid, :adults, :children, :infants, presence: true,
                                                                                         numericality: { greater_than_or_equal_to: 0, only_integer: true }
   # rubocop:enable Layout/LineLength
+
+  def update_with(reservation_params)
+    errors unless update(reservation_params)
+  rescue ArgumentError => e
+    e
+  end
 end
