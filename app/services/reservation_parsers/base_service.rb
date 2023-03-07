@@ -4,6 +4,14 @@ module ReservationParsers
   class BaseService
     attr_accessor :params, :partner
 
+    def self.formatted_phone_numbers(phone_numbers)
+      phone_numbers.is_a?(Array) ? phone_numbers : phone_numbers&.split(',')
+    end
+
+    def self.formatted_price(price)
+      (price.to_f * 100).to_i if price.present?
+    end
+
     def initialize(params)
       self.params = params
       verify_partner

@@ -28,6 +28,7 @@ Layout/LineLength:
   Max: 150
   Exclude:
     - spec/models/reservation_spec.rb
+    - spec/requests/api/v1/reservations_spec.rb
 
 Metrics/BlockLength:
   Exclude:

@@ -1,24 +1,40 @@
-# README
+# Hometime API App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Setup
 
-Things you may want to cover:
+```
+run bundle install
+run rails db:create
+run rails db:migrate
+(no seeds required)
+```
 
-* Ruby version
+## Running Locally
 
-* System dependencies
+The app has one POST route:
+```
+/api/v1/reservations
+```
 
-* Configuration
+At the command prompt:
+```
+run rails s
+```
+You can use a tool such as postman or a curl command to submit requests to
+```
+http://localhost:3000/api/v1/reservations
+```
+the POST request requires a JSON payload in the structure of one of the two onboarded partners, you can see examples of these two partners payloads at the top of the test case at /spec/requests/api/v1/reservation_spec.rb.
 
-* Database creation
+If a request is submit with a payload in any other structure, the api will respond with a 400 advising you of this.
 
-* Database initialization
+In order to onboard future partners you will need to create a Reservation Parser Service for that partner and hook this into the Reservation Parser Base Service which is used to identify a partner (verify_partner method) based on the partners' payload structures.
+Individual reservation parsers are found under services/reservation_parsers. The format method is used to normalize/translate the JSON payload into params that the rails app can accept.
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+## Config/Testing
 
-* Deployment instructions
-
-* ...
+```
+run rspec spec
+```
+The test case covers the guets and reservation models and the reservation post request
