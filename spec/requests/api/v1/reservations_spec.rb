@@ -130,7 +130,7 @@ RSpec.describe 'Api::V1::Reservations', type: :request do
         it 'returns an error message' do
           post api_v1_reservations_path(params: partner_one_params, headers:)
           resp = response.parsed_body
-          expect(resp.dig('errors', 'start_date').first).to eq("can't be blank")
+          expect(resp.dig('errors', 'start_date').first).to eq('cannot be blank or in the past')
           expect(response.status).to eq(422)
         end
       end

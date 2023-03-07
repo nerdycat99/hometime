@@ -56,6 +56,25 @@ describe Reservation do
           expect { create_reservation }.to change { Reservation.count }.by(0)
         end
       end
+      context 'with invalid end_date' do
+        let(:end_date) { 'qwerty' }
+        it 'is unsuccessful' do
+          expect { create_reservation }.to change { Reservation.count }.by(0)
+        end
+      end
+      context 'with start_date in the past' do
+        let(:start_date) { Date.current - 2.days }
+        it 'is unsuccessful' do
+          expect { create_reservation }.to change { Reservation.count }.by(0)
+        end
+      end
+      context 'with end_date on or before start_date' do
+        let(:start_date) { Date.current + 2.days }
+        let(:end_date) { Date.current + 2.days }
+        it 'is unsuccessful' do
+          expect { create_reservation }.to change { Reservation.count }.by(0)
+        end
+      end
       context 'with missing security_price' do
         let(:security_price) { nil }
         it 'is unsuccessful' do
